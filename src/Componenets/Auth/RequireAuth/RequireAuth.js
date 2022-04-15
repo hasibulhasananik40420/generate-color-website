@@ -4,13 +4,25 @@ import { Navigate, useLocation } from 'react-router-dom';
 import auth from '../../../Firebase.init';
 const RequireAuth = ({children}) => {
     const [user ,loading] = useAuthState(auth)
-    const location = useLocation
+    const location = useLocation()
 
-     if(!user){
-        return <Navigate to="/login" state={{ from: location }} replace />;
+    if(loading){
+        return <p>Loading</p>
+    }
 
-     }
-    return children
+    if(user){
+        return children;
+    }
+     else{
+        return <Navigate to="/login" state={{from: location}} replace />
+    }
+
+   
+    //  if(!user){
+    //     return <Navigate to="/login" state={{ from: location }} replace />;
+    //  }
+
+    // return children
 };
 
 export default RequireAuth;

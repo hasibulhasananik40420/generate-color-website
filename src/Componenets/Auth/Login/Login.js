@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../Firebase.init';
 import './Login.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
    
       const [userInfo ,setUserInfo] = useState({
         email: "" ,
         password : "" 
       })
-   
+    
+    //   2.02 hour
 
        const [errors , setErrors] = useState({
           errorEmails:"",
@@ -61,6 +65,38 @@ const Login = () => {
     
     }
 
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+       if (user) {
+           navigate(from , {replace: true});
+       }
+   }, [user]);
+
+     useEffect(()=>{
+        
+      if(hookError){
+          switch(hookError?.code){
+            case "auth/invalid-email":
+             toast("Invalid email provided, please provide a valid email"); 
+              break
+              
+              case "auth/invalid-password":
+                toast("Wrong password. Intruder!!")
+                break;
+                default:
+               toast("something went wrong")
+          }
+
+      }
+     } ,[hookError])
+
+
+    
+
     return (
         <div className='login-container'>
             <div className="login-title">Login</div>
@@ -70,9 +106,10 @@ const Login = () => {
               <input onChange={handlePasswordChange} type="password" name="" id="" placeholder='Enter Password' />
               {errors?.errorPassword && <p className='error-message'>{errors.errorPassword}</p>}
                <button>Login</button>
-                {/* {error && <p className='error-message'> {error}</p>} */}
-               
+                {/* {hookError && <p className='error-message'> {hookError?.message}</p>} */}
+                <ToastContainer />
             </form>
+             <p className='mt-3'> Create an account? <Link to='/singup'> <span className='text-red-400 ml-2'>Sing Up</span></Link></p>
         </div>
     );
 };
