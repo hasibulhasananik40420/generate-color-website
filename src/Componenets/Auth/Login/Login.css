@@ -5,9 +5,18 @@
     height: 500px;
     border-radius: 20px;
     padding: 40px;
-    box-sizing: border-box;
+    /* box-sizing: border-box;
     background: #ecf0f3;
-    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white; */
+    /* border-radius: 20px;
+background: #afd9c4;
+box-shadow: inset 5px 5px 10px #91b4a3,
+            inset -5px -5px 10px #cdfee5; */
+
+    border-radius: 13px;
+    background: #89e6b8;
+    box-shadow: inset 6px 6px 6px #4e8369,
+        inset -6px -6px 6px #c4ffff;
 }
 
 
@@ -40,7 +49,7 @@
     margin-bottom: 4px;
     color: gray;
     margin: 15px 0 5px 5px;
-    
+
 }
 
 .login-container input::placeholder {
@@ -61,25 +70,29 @@
 .login-container button {
     color: white;
     margin-top: 20px;
-    background: #1da1f2;
+    /* background: #1da1f2; */
+    background: #4e8369;
     height: 40px;
     border-radius: 20px;
     cursor: pointer;
     font-weight: 900;
-    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
     transition: 0.5s;
 }
 
 .login-container button:hover {
-    box-shadow: none;
+   
+ box-shadow: 6px 6px 6px #cbced1, -4px -4px 5px rgb(247, 222, 222); 
+ transition: all;
+
 }
 
 
-.error-message{
+.error-message {
     font-size: 12px;
     color: red;
-    margin:10px;
+    margin: 10px;
 }
-.error-message::before{
+
+.error-message::before {
     content: "❌ ";
 }
