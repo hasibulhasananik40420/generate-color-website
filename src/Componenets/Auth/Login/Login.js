@@ -27,6 +27,7 @@ const Login = () => {
         hookError,
       ] = useSignInWithEmailAndPassword(auth);
 
+      const [showPassword , setShowPassword] = useState(false)
 
     const handleEmailChange = (e)=>{
         const emailRegex = /\S+@\S+\.\S+/;
@@ -103,8 +104,11 @@ const Login = () => {
             <form onSubmit={handleLogIn} className='login-form'>
               <input onChange={handleEmailChange} type="email" name="" id="" placeholder='Email' />
                {errors?.errorEmails && <p className='error-message'>{errors.errorEmails}</p>}
-              <input onChange={handlePasswordChange} type="password" name="" id="" placeholder='Enter Password' />
+               <div className='relative'>
+              <input onChange={handlePasswordChange} type={showPassword ? 'text' : 'password'} name="" id="" placeholder='Enter Password' />
               {errors?.errorPassword && <p className='error-message'>{errors.errorPassword}</p>}
+              <p><img onClick={()=>setShowPassword(!showPassword)} className='w-[30px] absolute top-1 right-3 mt-2' src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Antu_redeyes.svg/120px-Antu_redeyes.svg.png" alt="" /></p>
+               </div>
                <button>Login</button>
                 {/* {hookError && <p className='error-message'> {hookError?.message}</p>} */}
                 <ToastContainer />

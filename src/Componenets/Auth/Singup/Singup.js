@@ -28,6 +28,8 @@ const Singup = () => {
         hookError,
       ] = useCreateUserWithEmailAndPassword(auth);
 
+      const [showPassword , setShowPassword] = useState(false)
+
 
     const handleEmailChange = (e)=>{
         const emailRegex = /\S+@\S+\.\S+/;
@@ -99,9 +101,11 @@ const Singup = () => {
      } ,[hookError])
       
      const navigate = useNavigate()
-      if(user){
-        navigate('/')
-      }
+      useEffect(()=>{
+        if(user){
+            navigate('/')
+          }
+      },[])
 
     return (
         <div className='login-container'>
@@ -109,8 +113,11 @@ const Singup = () => {
             <form onSubmit={handleSingIn} className='login-form'>
               <input onChange={handleEmailChange} type="email" name="" id="" placeholder='Email' />
                {errors?.errorEmails && <p className='error-message'>{errors.errorEmails}</p>}
-              <input onChange={handlePasswordChange} type="password" name="" id="" placeholder='Enter Password' />
+                <div className='relative'>
+              <input onChange={handlePasswordChange} type={showPassword? 'text': 'password'} name="" id="" placeholder='Enter Password' />
               {errors?.errorPassword && <p className='error-message'>{errors.errorPassword}</p>}
+               <p><img onClick={()=>setShowPassword(!showPassword)} className='w-[30px] absolute top-1 right-3 mt-2' src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Antu_redeyes.svg/120px-Antu_redeyes.svg.png" alt="" /></p>
+              </div>
               <input onChange={handleConfirmPasswordChange} type="password" name="" id="" placeholder='Confirm Password' />
                <button>Sing Up</button>
                 <ToastContainer />

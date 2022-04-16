@@ -3,7 +3,7 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../Firebase.init';
-
+import logo from '../../All-images/images/index2-removebg-preview.png'
 const Nav = () => {
      const [user] = useAuthState(auth)
 
@@ -12,10 +12,10 @@ const Nav = () => {
           signOut(auth)
       }
     return (
-        <nav className='flex justify-between p-4 bg-slate-200 sticky top-0'>
+        <nav className='flex justify-between p-4 bg-white sticky top-0'>
          
-         <div className='mr-6 font-serif font-medium text-xl'>
-             logo
+         <div className='mr-6'>
+             <img className='h-[40px] w-full' src={logo} alt="" />
          </div>
 
           <div className='mr-10'>
